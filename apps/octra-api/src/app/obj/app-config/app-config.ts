@@ -1,5 +1,6 @@
 import {Validator, ValidatorResult} from 'jsonschema';
 import {AppConfigurationSchema} from './app-config.schema';
+import {KeycloakConfig} from 'keycloak-connect';
 
 export type DBType = 'PostgreSQL'; // currently PostgreSQL only
 
@@ -24,14 +25,17 @@ export interface IAPIConfiguration {
   url: string,
   host: string,
   port: number,
+  baseURL: string,
   debugging?: boolean,
+  trustProxy?: boolean,
   uploadPath: string,
   secret: string,
   passwordSalt: string,
   shibboleth: {
     secret: string,
     windowURL: string
-  }
+  },
+  "keycloak": KeycloakConfig
 }
 
 export interface IDBSSLConfiguration {

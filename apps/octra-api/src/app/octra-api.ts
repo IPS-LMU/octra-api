@@ -38,7 +38,7 @@ export class OctraApi {
   private _appPath: string;
   private settings: AppConfiguration;
   private name = 'OCTRA';
-  private version = '0.2.7';
+  private version = '0.3.0';
   private environment: 'development' | 'production';
   private dbManager: DBManager;
 
@@ -71,6 +71,13 @@ export class OctraApi {
 
     if (this.settings.validation.valid) {
       const app = express();
+
+      if (this.settings.api.trustProxy && this.settings.api.trustProxy === true) {
+        app.set('trust proxy', true);
+      }
+      if (!this.settings.api.baseURL) {
+        this.settings.api.baseURL = '/';
+      }
       app.set('view engine', 'ejs');
       app.engine('ejs', ejs.__express); //<-- this
 
@@ -132,7 +139,7 @@ export class OctraApi {
 
       console.log(`static is ${path.join(this._appPath, 'static')}`);
       app.use(express.static(path.join(this._appPath, 'static')));
-      app.use('/', router);
+      app.use(`${this.settings.api.baseURL}`, router);
 
       router.route(`/confirmShibboleth`).post((req, res) => {
         jwt.verify(req.body.shibToken, this.settings.api.shibboleth.secret, (err, tokenBody) => {

@@ -8,12 +8,14 @@ import {UserRemoveCommand} from './user.remove.command';
 import {UserExistsHashCommand} from './user.exists-hash.command';
 import {UserInfoCommand} from './user.info.command';
 import {UserCurrentInfoCommand} from './user.current.info.command';
+import {UserLoginKeycloakCommand} from './user.login.keycloak.command';
 
 export class UserModule extends CommandModule {
   constructor() {
     super('/users', 'Users');
     this._commands = [
       new UserLoginCommand(),
+      new UserLoginKeycloakCommand(),
       new UserRegisterCommand(),
       new UserExistsHashCommand(),
       new UserCurrentInfoCommand(),

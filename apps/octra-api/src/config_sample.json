@@ -19,13 +19,25 @@
     "url": "http://localhost",
     "host": "",
     "port": 8080,
+    "trustProxy": false,
+    "baseURL": "/",
     "debugging": false,
     "uploadPath": "data",
     "secret": "",
     "passwordSalt": "",
     "shibboleth": {
+      "enabled": false,
       "secret": "",
       "windowURL": ""
+    },
+    "keycloak": {
+      "enabled": false,
+      "realm": "",
+      "auth-server-url": "",
+      "ssl-required": "",
+      "resource": "",
+      "public-client": true,
+      "confidential-port": 0
     }
   }
 }
